@@ -13,31 +13,30 @@ const axios = require('axios')
 
 
 server.get("/", (req, res) => {
-  res.json({ message: "Haxolot FRONT application." });
+  //res.json({ message: "Haxolot FRONT application." });
+const axios = require('axios');
 
- 
-//  axios
-//     .get('localhost:3000/schools/all', {
-//       headers: {
-//         accept: 'application/json',
-//         'content-type': 'application/json',
-//       },
-//     })
-//     .then(function(response) {
-//       myWorkspace.push(response.data['workspaces']);
-//       return myWorkspace;
-//     })
-//     .catch(function(error) {
-//       // handle error
-//       console.log(error); 
-//     })
-//     .then(function() {
-//       // always executed
-//     });
+const baseUrl = "https://loripsum.net/api";
 
-//   res.render('fullscreen', {
-//     workspace: JSON.stringify(myWorkspace),
-//   });
+
+
+axios.get(baseUrl + '/plaintext', {
+            responseType: "text"
+        })
+        .then((response) => {
+ const data = response.data;
+        res.send( data );
+console.log(response.data);
+        })
+
+
+        .catch((error) => {
+            // console.log(error);
+            res.json({
+                message: "Erreur serveur."
+            })
+        })
+
 
 
 });
