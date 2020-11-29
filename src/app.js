@@ -61,12 +61,13 @@ server.get('/about', function(req, res) {
     console.log("front about");
     // axios.get('http://localhost:3000/users/all')
     axios.get('http://localhost:3000/users/all', {
-                   // responseType: "application/json"
+                  responseType: "application/json"
                 })
             .then((response) => {
+                console.log(response);
                 const tagline = response;
 
-                console.log(response);
+             
 
 
         res.render('pages/about', {
@@ -77,7 +78,7 @@ server.get('/about', function(req, res) {
         
         
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
                 res.json({
                     message: "Erreur serveur."
                 })

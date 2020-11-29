@@ -12,3 +12,8 @@ services:
       - '3001:3001'
     volumes:
       - './src:/home/node/app'
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
