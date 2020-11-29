@@ -1,7 +1,5 @@
 ## HAXOLOT
 
-frontend de l'api haxolot-api
-
 ## URL
 ```
 127.0.0.1:3000
@@ -12,3 +10,4 @@ frontend de l'api haxolot-api
 docker-compose up
 ```
 
+create env. file with JWT_SECRET=*yoursecret* before starting project
