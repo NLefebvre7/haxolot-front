@@ -4,7 +4,7 @@ frontend de l'api haxolot-api
 
 ## URL
 ```
-127.0.0.1:3000
+127.0.0.1:3001
 ```
 
 ## Launch docker
