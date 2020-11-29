@@ -1,6 +1,35 @@
 version: '3.6'
 services:
   node:
+    container_name: project_api_node
+    image: 'node:latest'
+    working_dir: /home/node/app
+    command:
+      - /bin/sh
+      - '-c'
+      - 'npm install && npm start'
+    ports:
+      - '3000:3000'
+    volumes:
+      - './src:/home/node/app'
+    links:
+      - mongo
+    networks:
+      - my-network
+    env_file:
+      - .env
+    expose:
+    - 3000
+
+  mongo:
+    container_name: project_api_mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+
+  nodefront:
     container_name: project_front
     image: 'node:latest'
     working_dir: /home/node/app
@@ -11,9 +40,11 @@ services:
     ports:
       - '3001:3001'
     volumes:
-      - './src:/home/node/app'
+      - './haxolot-front/src:/home/node/app'
     networks:
       - my-network
+    depends_on:
+      - node
 networks:
   my-network:
     driver: bridge
