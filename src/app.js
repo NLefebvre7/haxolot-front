@@ -11,35 +11,50 @@ server.use(bodyParser.json());
 const axios = require('axios')
 
 
-
-server.get("/", (req, res) => {
-  //res.json({ message: "Haxolot FRONT application." });
-const axios = require('axios');
-
-const baseUrl = "https://loripsum.net/api";
+server.set('view engine', 'ejs');
 
 
 
-axios.get(baseUrl + '/plaintext', {
-            responseType: "text"
-        })
-        .then((response) => {
- const data = response.data;
-        res.send( data );
-console.log(response.data);
-        })
+// server.get("/", (req, res) => {
+//   //res.json({ message: "Haxolot FRONT application." });
+// const axios = require('axios');
 
-
-        .catch((error) => {
-            // console.log(error);
-            res.json({
-                message: "Erreur serveur."
-            })
-        })
+// const baseUrl = "https://loripsum.net/api";
 
 
 
+// axios.get(baseUrl + '/plaintext', {
+//             responseType: "text"
+//         })
+//         .then((response) => {
+//  const data = response.data;
+//         res.send( data );
+// console.log(response.data);
+//         })
+
+
+//         .catch((error) => {
+//             // console.log(error);
+//             res.json({
+//                 message: "Erreur serveur."
+//             })
+//         })
+
+
+
+// });
+
+server.get('/', function(req, res) {
+    res.render('pages/index');
 });
+
+// about page
+server.get('/about', function(req, res) {
+    res.render('pages/about');
+});
+
+
+
 
 
 console.log("app js front");
