@@ -45,15 +45,22 @@ server.set('view engine', 'ejs');
 // });
 
 server.get('/', function(req, res) {
-    res.render('pages/index');
+    var ecoles = [
+        { ecoles: 'ecole1', location: "versici"},
+        { ecoles: 'ecole2', location: "verslabas"}
+    ];
+    var tagline = "ceci est une variable unique, juste une phrase";
+
+    res.render('pages/index', {
+        ecoles: ecoles,
+        tagline: tagline
+    });
 });
 
 // about page
 server.get('/about', function(req, res) {
     res.render('pages/about');
 });
-
-
 
 
 
