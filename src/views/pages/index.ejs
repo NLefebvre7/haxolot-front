@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Ceci est l'index, la page de login/register quoi</h1>
+        <p>C'est vrmt un template eclate, quelqun pour bootstrap tout ca ?</p>
+    
+    
+        <h2>Variable unique</h2>
+        <p><strong><%= tagline %></strong></p>
+    
+        <h2>La boucle</h2>
+        <ul>
+            <% ecoles.forEach(function(ecoles) { %>
+                <li>
+                    <strong><%= ecoles.ecoles %></strong>
+                    localisé <strong><%= ecoles.location %></strong>
+                   
+                </li>
+
+                
+            <% }); %>
+            (les elements en gras sont des variables)
+        </ul>
+    
+    </div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

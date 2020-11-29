@@ -11,35 +11,142 @@ server.use(bodyParser.json());
 const axios = require('axios')
 
 
-
-server.get("/", (req, res) => {
-  //res.json({ message: "Haxolot FRONT application." });
-const axios = require('axios');
-
-const baseUrl = "https://loripsum.net/api";
+server.set('view engine', 'ejs');
 
 
 
-axios.get(baseUrl + '/plaintext', {
-            responseType: "text"
-        })
-        .then((response) => {
- const data = response.data;
-        res.send( data );
-console.log(response.data);
-        })
-
-
-        .catch((error) => {
-            // console.log(error);
-            res.json({
-                message: "Erreur serveur."
-            })
-        })
+// server.get("/", (req, res) => {
+//   //res.json({ message: "Haxolot FRONT application." });
+// const axios = require('axios');
 
 
 
+
+
+// axios.get('https://loripsum.net/api/plaintext', {
+//             responseType: "text"
+//         })
+//         .then((response) => {
+//  const data = response.data;
+//         res.send( data );
+// console.log(response.data);
+//         })
+
+
+//         .catch((error) => {
+//             // console.log(error);
+//             res.json({
+//                 message: "Erreur serveur."
+//             })
+//         })
+
+
+
+// });
+
+server.get('/', function(req, res) {
+    var ecoles = [
+        { ecoles: 'ecole1', location: "versici"},
+        { ecoles: 'ecole2', location: "verslabas"}
+    ];
+    var tagline = "ceci est une variable unique, juste une phrase";
+
+    res.render('pages/index', {
+        ecoles: ecoles,
+        tagline: tagline
+    }); 
 });
+  
+server.get('/about', function(req, res) {
+    console.log("front about");
+    // axios.get('http://localhost:3000/users/all')
+    axios.get('http://localhost:3000/users/all', {
+                   // responseType: "application/json"
+                })
+            .then((response) => {
+                const tagline = response;
+
+                console.log(response);
+
+
+        res.render('pages/about', {
+            tagline: tagline
+        });
+
+            })
+        
+        
+            .catch((error) => {
+                // console.log(error);
+                res.json({
+                    message: "Erreur serveur."
+                })
+            })
+
+
+   
+});
+
+// about page
+// server.get('/about', function(req, res) {
+//     axios.get('https://loripsum.net/api/plaintext', {
+//         responseType: "text"
+//     })
+//     .then((response) => {
+
+// const data = response.data;
+// res.render('pages/about');
+// console.log(response.data);
+//     })
+
+
+//     .catch((error) => {
+//         // console.log(error);
+//         res.json({
+//             message: "Erreur serveur."
+//         })
+//     })
+
+
+
+
+
+//     res.render('pages/about');
+// });
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+// Navigation
+app.get('', (req, res)=> {
+    res.render('index')
+})
+
+app.get('/register', (req, res)=> {
+    res.render('register')
+})
+
+app.post('/register', urlencodedParser, [
+    check('username', 'This username must me 3+ characters long')
+        .exists()
+        .isLength({ min: 3 }),
+    check('email', 'Email is not valid')
+        .isEmail()
+        .normalizeEmail()
+
+], (req, res)=> {
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        // return res.status(422).jsonp(errors.array())
+        const alert = errors.array()
+        res.render('register', {
+            alert
+        })
+    }
+
+
+})
+
 
 
 console.log("app js front");
