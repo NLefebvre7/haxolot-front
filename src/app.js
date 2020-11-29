@@ -19,11 +19,11 @@ server.set('view engine', 'ejs');
 //   //res.json({ message: "Haxolot FRONT application." });
 // const axios = require('axios');
 
-// const baseUrl = "https://loripsum.net/api";
 
 
 
-// axios.get(baseUrl + '/plaintext', {
+
+// axios.get('https://loripsum.net/api/plaintext', {
 //             responseType: "text"
 //         })
 //         .then((response) => {
@@ -54,13 +54,65 @@ server.get('/', function(req, res) {
     res.render('pages/index', {
         ecoles: ecoles,
         tagline: tagline
-    });
+    }); 
+});
+  
+server.get('/about', function(req, res) {
+    console.log("front about");
+    // axios.get('http://localhost:3000/users/all')
+    axios.get('http://localhost:3000/users/all', {
+                   // responseType: "application/json"
+                })
+            .then((response) => {
+                const tagline = response;
+
+                console.log(response);
+
+
+        res.render('pages/about', {
+            tagline: tagline
+        });
+
+            })
+        
+        
+            .catch((error) => {
+                // console.log(error);
+                res.json({
+                    message: "Erreur serveur."
+                })
+            })
+
+
+   
 });
 
 // about page
-server.get('/about', function(req, res) {
-    res.render('pages/about');
-});
+// server.get('/about', function(req, res) {
+//     axios.get('https://loripsum.net/api/plaintext', {
+//         responseType: "text"
+//     })
+//     .then((response) => {
+
+// const data = response.data;
+// res.render('pages/about');
+// console.log(response.data);
+//     })
+
+
+//     .catch((error) => {
+//         // console.log(error);
+//         res.json({
+//             message: "Erreur serveur."
+//         })
+//     })
+
+
+
+
+
+//     res.render('pages/about');
+// });
 
 
 
